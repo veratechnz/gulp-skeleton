@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div ng-app="App">
+      <div ng-controller="TasksCtrl as vm" class="container">
+        <h1 class="task-list">AngularJS todo app </h1>
+        <div class="task-list">
+          <h2>Remaining<small>&mdash; {{ vm.tasks.length }} / {{ vm.getTotalTasks() }} ({{ vm.calculatePercent(vm.tasks.length) }}%)</small></h2>
+          <ul>
+            <li ng-repeat="task in vm.tasks" class="task">
+               
+              {{ task }}<a ng-click="vm.markAsComplete($index)"><i class="fa fa-check"></i></a>
+            </li>
+          </ul>
+          <form ng-submit="vm.add(vm.newTask)">
+            <div class="form-group">
+              <input ng-model="vm.newTask" type="text" placeholder="Type new task and hit enter" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="task-list">
+          <h2>Completed<small>&mdash; {{ vm.completedTasks.length }} / {{ vm.getTotalTasks() }} ({{ vm.calculatePercent(vm.completedTasks.length) }}%)</small></h2>
+          <ul>
+            <li ng-repeat="task in vm.completedTasks" class="completed-task">{{ task }}<a ng-click="vm.markAsIncomplete($index)"><i class="fa fa-undo">  </i></a></li>
+          </ul>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+          <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+          <script src="./js/custom.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/custom.min.css', rel='stylesheet')
+  body
+    div(ng-app="App")
+      .container(ng-controller="TasksCtrl as vm")
+        h1.task-list AngularJS todo app 
+        .task-list
+          h2 Remaining
+            small &mdash; {{ vm.tasks.length }} / {{ vm.getTotalTasks() }} ({{ vm.calculatePercent(vm.tasks.length) }}%)
+           ul
+             li.task(ng-repeat="task in vm.tasks") 
+              | {{ task }}
+              a(ng-click="vm.markAsComplete($index)")
+                i(class="fa fa-check")
+
+           form(ng-submit="vm.add(vm.newTask)")
+              .form-group
+                input(ng-model="vm.newTask",type="text",class="form-control",placeholder="Type new task and hit enter")
+        .task-list
+          h2 Completed
+              small &mdash; {{ vm.completedTasks.length }} / {{ vm.getTotalTasks() }} ({{ vm.calculatePercent(vm.completedTasks.length) }}%)
+          ul
+            li(ng-repeat="task in vm.completedTasks",class="completed-task") {{ task }}
+              a(ng-click="vm.markAsIncomplete($index)")
+                i(class="fa fa-undo")   
+          script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+          script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js')
+          script(src='./js/custom.js')
